@@ -42,20 +42,23 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        Debug.Log(value.Get<Vector3>());
         moveInput = value.Get<Vector3>();
     }
 
     void MovePlayer()
     {
-        playerRigidbody.AddForce(new Vector3(forwardMovement, 0f, backwardMovement));
+        playerRigidbody.AddForce(new Vector3(forwardMovement, 0f, backwardMovement),ForceMode.VelocityChange);
 
         if (Mathf.Abs(playerRigidbody.velocity.x) > movementSpeed)
         {
+            Debug.Log("I am walking forward");
             playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y, 
                 playerRigidbody.velocity.z);
         }
         if (Mathf.Abs(playerRigidbody.velocity.z) > movementSpeed)
         {
+            Debug.Log("I am walking backwards");
             playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y,
                 Mathf.Sign(playerRigidbody.velocity.z) * movementSpeed);
         }

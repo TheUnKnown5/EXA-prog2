@@ -6,9 +6,18 @@
             "id": "d2a8728e-2f8a-4440-ad7e-f63dd6d4e5cd",
             "actions": [
                 {
-                    "name": "Moving",
+                    "name": "Move",
                     "type": "Value",
                     "id": "a3432eae-c275-47ed-a25b-edaa55c3bdd7",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Value",
+                    "id": "4bac3ee3-1d2a-4e2b-ad6b-e805f3e0fd19",
                     "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
@@ -23,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -56,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -67,29 +76,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "Jumping",
-                    "id": "6b1dcb00-ab58-4342-b479-ce0af493aec8",
+                    "id": "70839b5b-7a0e-48bc-ae23-80ebc8cf5434",
                     "path": "3DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Jump",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
-                    "id": "83e24a8e-1d9a-4d2e-b011-a75ac7d09193",
+                    "id": "a743917c-1097-43b0-9985-4280f5aa7e8c",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Moving",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
