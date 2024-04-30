@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 204375826}
   - component: {fileID: 204375825}
   - component: {fileID: 204375824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,6 +377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  JumpableLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  Jumpables:
+  - {fileID: 204375823}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
