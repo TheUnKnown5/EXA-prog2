@@ -51,7 +51,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Mathf.Abs(playerRigidbody.velocity.x) > movementSpeed)
         {
-            playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y,
+            playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y, 
+                playerRigidbody.velocity.z);
+        }
+        if (Mathf.Abs(playerRigidbody.velocity.z) > movementSpeed)
+        {
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y,
                 Mathf.Sign(playerRigidbody.velocity.z) * movementSpeed);
         }
     }

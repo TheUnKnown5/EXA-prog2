@@ -6,7 +6,7 @@
             "id": "d2a8728e-2f8a-4440-ad7e-f63dd6d4e5cd",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Moving",
                     "type": "Value",
                     "id": "a3432eae-c275-47ed-a25b-edaa55c3bdd7",
                     "expectedControlType": "Vector3",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +45,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -56,7 +56,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -67,7 +67,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -78,7 +78,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -89,7 +89,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Moving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
