@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movementSpeed = 5.0f;
 
     [Header("Jumoing")]
-    [SerializeField] LayerMask JumpableLayers = new LayerMask();
-    [SerializeField] List<GameObject> Jumpables = new List<GameObject>();
+    [SerializeField] LayerMask jumpableLayers = new LayerMask();
+    [SerializeField] List<GameObject> jumpableObject = new List<GameObject>();
 
     Vector3 moveInput; 
 
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        Debug.Log(value.Get<Vector3>());
+        //Debug.Log(value.Get<Vector3>());
         moveInput = value.Get<Vector3>();
     }
 
@@ -52,13 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (Mathf.Abs(playerRigidbody.velocity.x) > movementSpeed)
         {
-            Debug.Log("I am walking forward");
+            //Debug.Log("I am walking forward");
             playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y, 
                 playerRigidbody.velocity.z);
         }
         if (Mathf.Abs(playerRigidbody.velocity.z) > movementSpeed)
         {
-            Debug.Log("I am walking backwards");
+            //Debug.Log("I am walking backwards");
             playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y,
                 Mathf.Sign(playerRigidbody.velocity.z) * movementSpeed);
         }
@@ -82,13 +82,14 @@ public class PlayerMovement : MonoBehaviour
     
     public bool CanJump()
     {
-        return Jumpables.Count > 0;
+        return jumpableObject.Count > 0;
     }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & JumpableLayers) != 0)
+        if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
         {
-            Jumpables.Add(collision.gameObject);
+            jumpableObject.Add(collision.gameObject);
         }
 
         //if (((1 << collision.gameObject.layer) & JumpableLayers) == 0)
@@ -99,9 +100,9 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & JumpableLayers) != 0)
+        if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
         {
-            Jumpables.Remove(collision.gameObject);
+            jumpableObject.Remove(collision.gameObject);
         }
     }
 }
