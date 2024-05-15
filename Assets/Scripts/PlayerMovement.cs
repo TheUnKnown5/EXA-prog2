@@ -15,7 +15,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask jumpableLayers = new LayerMask();
     [SerializeField] List<GameObject> jumpableObject = new List<GameObject>();
 
-    Vector3 moveInput; 
+    [Header("Mouse")]
+    [SerializeField] float mouseSensativity = 1f;
+
+    Vector3 moveInput;
+
+    float totalRotationX = 0;
+    float totalRotationY = 0;
 
     float forwardMovement;
     float backwardMovement;
@@ -31,13 +37,33 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        CalculateRotation();
+
         forwardMovement = moveInput.x;
         backwardMovement = moveInput.z;
     }
 
     void FixedUpdate()
     {
+        ApplyRotation();
+
         MovePlayer();
+    }
+
+    void CalculateRotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensativity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensativity;
+        totalRotationX += mouseX;
+        totalRotationY += mouseY;
+    }
+
+    void ApplyRotation()
+    {
+        //Need some work done
+        Camera.main.transform.localRotation = Quaternion.Euler(-totalRotationX, 0, 0);
+        playerRigidbody.rotation = Quaternion.Euler(0, totalRotationY, 0);
     }
 
     void OnMove(InputValue value)

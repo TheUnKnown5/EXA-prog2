@@ -384,6 +384,7 @@ MonoBehaviour:
     m_Bits: 64
   jumpableObject:
   - {fileID: 204375823}
+  mouseSensativity: 10
 --- !u!114 &348891595
 MonoBehaviour:
   m_ObjectHideFlags: 0
