@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
     void ApplyRotation()
     {
         //Need some work done
-        Camera.main.transform.localRotation = Quaternion.Euler(-totalRotationX, 0, 0);
-        playerRigidbody.rotation = Quaternion.Euler(0, totalRotationY, 0);
+        Camera.main.transform.localRotation = Quaternion.Euler(0, totalRotationX, 0);
+        playerRigidbody.rotation = Quaternion.Euler(totalRotationY, 0, 0);
     }
 
     void OnMove(InputValue value)
