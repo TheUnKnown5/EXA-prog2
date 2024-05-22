@@ -5,13 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Kolla i player movement scripted i grupp 6 projektet.
-    // Just change it so it works in a 3D game.
-
     [Header("Movement")]
     [SerializeField] float movementSpeed = 5.0f;
 
-    [Header("Jumoing")]
+    [Header("Jumping")]
+    [SerializeField] float jumpForce = 0f;
     [SerializeField] LayerMask jumpableLayers = new LayerMask();
     [SerializeField] List<GameObject> jumpableObject = new List<GameObject>();
 
@@ -62,8 +60,12 @@ public class PlayerMovement : MonoBehaviour
     void ApplyRotation()
     {
         //Need some work done
-        Camera.main.transform.localRotation = Quaternion.Euler(0, totalRotationX, 0);
-        playerRigidbody.rotation = Quaternion.Euler(totalRotationY, 0, 0);
+
+        playerRigidbody.rotation = Quaternion.Euler(0, totalRotationX, 0);
+
+        //Previuos tries
+        //Camera.main.transform.localRotation = Quaternion.Euler(0, totalRotationX, 0);
+        //playerRigidbody.rotation = Quaternion.Euler(totalRotationY, 0, 0);
     }
 
     void OnMove(InputValue value)
@@ -103,7 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        
+        //Needs work
+        playerRigidbody.velocity += new Vector3(playerRigidbody.velocity.x, jumpForce, playerRigidbody.velocity.z);
     }
     
     public bool CanJump()
