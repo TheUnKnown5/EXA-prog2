@@ -59,34 +59,26 @@ public class PlayerMovement : MonoBehaviour
 
     void ApplyRotation()
     {
-        //Need some work done
-
         playerRigidbody.rotation = Quaternion.Euler(0, totalRotationX, 0);
-
-        //Previuos tries
-        //Camera.main.transform.localRotation = Quaternion.Euler(0, totalRotationX, 0);
-        //playerRigidbody.rotation = Quaternion.Euler(totalRotationY, 0, 0);
     }
 
     void OnMove(InputValue value)
     {
-        //Debug.Log(value.Get<Vector3>());
         moveInput = value.Get<Vector3>();
     }
 
     void MovePlayer()
     {
-        playerRigidbody.AddForce(new Vector3(forwardMovement, 0f, backwardMovement),ForceMode.VelocityChange);
+        playerRigidbody.AddForce(Camera.main.transform.right.normalized * forwardMovement + 
+            Camera.main.transform.forward.normalized * backwardMovement, ForceMode.VelocityChange);
 
         if (Mathf.Abs(playerRigidbody.velocity.x) > movementSpeed)
         {
-            //Debug.Log("I am walking forward");
             playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y, 
                 playerRigidbody.velocity.z);
         }
         if (Mathf.Abs(playerRigidbody.velocity.z) > movementSpeed)
         {
-            //Debug.Log("I am walking backwards");
             playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y,
                 Mathf.Sign(playerRigidbody.velocity.z) * movementSpeed);
         }
@@ -105,7 +97,6 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        //Needs work
         playerRigidbody.velocity += new Vector3(playerRigidbody.velocity.x, jumpForce, playerRigidbody.velocity.z);
     }
     
@@ -116,22 +107,30 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            jumpableObject.Add(collision.gameObject);
+            PlayerJump();
         }
 
-        //if (((1 << collision.gameObject.layer) & JumpableLayers) == 0)
+        //if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
         //{
-        //    //It wasn't in an ignore layer
+        //    jumpableObject.Add(collision.gameObject);
         //}
     }
 
-    void OnCollisionExit(Collision collision)
-    {
-        if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
-        {
-            jumpableObject.Remove(collision.gameObject);
-        }
-    }
+    //void OnCollisionExit(Collision collision)
+    //{
+    //    if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
+    //    {
+    //        jumpableObject.Remove(collision.gameObject);
+    //    }
+    //}
 }
+
+//Previuos tries
+//Camera.main.transform.localRotation = Quaternion.Euler(0, totalRotationX, 0);
+//playerRigidbody.rotation = Quaternion.Euler(totalRotationY, 0, 0);
+//Debug.Log(value.Get<Vector3>());
+//Debug.Log("I am walking forward");
+//Debug.Log("I am walking backwards");
+//Debug.Log("Moving forward");

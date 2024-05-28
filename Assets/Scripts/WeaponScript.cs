@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    void Start()
+    [Header("Enemy reference")]
+    [SerializeField] GameObject enemy;
+
+    public virtual void Attack()
     {
-        
+        Destroy(enemy);
     }
-    void Update()
+
+    void OnCollisionEnter(Collision other)
     {
-        
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Attack();
+        }
     }
 }
