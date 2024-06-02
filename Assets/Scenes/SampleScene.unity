@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  jumpForce: 0
+  jumpForce: 5
   jumpableLayers:
     serializedVersion: 2
     m_Bits: 64

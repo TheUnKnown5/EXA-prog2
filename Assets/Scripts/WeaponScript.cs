@@ -8,16 +8,8 @@ public class WeaponScript : MonoBehaviour
     [Header("Enemy reference")]
     [SerializeField] GameObject enemy;
 
-    public virtual void Attack()
+    public virtual void DestroyEnemy()
     {
         Destroy(enemy);
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Attack();
-        }
     }
 }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MeleeWeapon : WeaponScript
 {
-    public override void Attack()
+
+
+    public override void DestroyEnemy()
     {
-        base.Attack();
+        base.DestroyEnemy();
     }
 }

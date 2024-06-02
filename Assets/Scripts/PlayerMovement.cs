@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // The jump needs some work done
+
     [Header("Movement")]
     [SerializeField] float movementSpeed = 5.0f;
 
     [Header("Jumping")]
-    [SerializeField] float jumpForce = 0f;
+    [SerializeField] float jumpForce = 5f;
     [SerializeField] LayerMask jumpableLayers = new LayerMask();
     [SerializeField] List<GameObject> jumpableObject = new List<GameObject>();
 
@@ -23,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     float forwardMovement;
     float backwardMovement;
+
+    bool isGrounded = false;
 
     Rigidbody playerRigidbody;
     CapsuleCollider playerCollider;
@@ -40,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
         forwardMovement = moveInput.x;
         backwardMovement = moveInput.z;
+
+        Debug.Log("Is grounded: " + isGrounded);
     }
 
     void FixedUpdate()
@@ -69,24 +75,28 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        playerRigidbody.AddForce(Camera.main.transform.right.normalized * forwardMovement + 
-            Camera.main.transform.forward.normalized * backwardMovement, ForceMode.VelocityChange);
+        Vector3 movement = Camera.main.transform.right.normalized * forwardMovement + 
+            Camera.main.transform.forward.normalized * backwardMovement;
 
-        if (Mathf.Abs(playerRigidbody.velocity.x) > movementSpeed)
+        movement.y = 0;
+
+        playerRigidbody.AddForce(movement * movementSpeed, ForceMode.VelocityChange);
+
+        Vector3 velocity = playerRigidbody.velocity;
+        if (Mathf.Abs(velocity.x) > movementSpeed)
         {
-            playerRigidbody.velocity = new Vector3(Mathf.Sign(playerRigidbody.velocity.x) * movementSpeed, playerRigidbody.velocity.y, 
-                playerRigidbody.velocity.z);
+            velocity.x = Mathf.Sign(velocity.x) * movementSpeed;
         }
-        if (Mathf.Abs(playerRigidbody.velocity.z) > movementSpeed)
+        if (Mathf.Abs(velocity.z) > movementSpeed)
         {
-            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y,
-                Mathf.Sign(playerRigidbody.velocity.z) * movementSpeed);
+            velocity.z = Mathf.Sign(velocity.z) * movementSpeed;
         }
+        playerRigidbody.velocity = velocity;
     }
 
     void OnJump(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && isGrounded)
         {
             if (CanJump())
             {
@@ -97,34 +107,33 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        playerRigidbody.velocity += new Vector3(playerRigidbody.velocity.x, jumpForce, playerRigidbody.velocity.z);
+        Debug.Log("I am jumping");
+        playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isGrounded = false;
     }
-    
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (((1 << other.gameObject.layer) & jumpableLayers) != 0)
+        {
+            Debug.Log("Landed on jumpablelayers");
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        if (((1 << other.gameObject.layer) & jumpableLayers) != 0)
+        {
+            Debug.Log("Left jumpablelayers");
+            isGrounded = false;
+        }
+    }
+
     public bool CanJump()
     {
-        return jumpableObject.Count > 0;
+        return isGrounded;
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            PlayerJump();
-        }
-
-        //if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
-        //{
-        //    jumpableObject.Add(collision.gameObject);
-        //}
-    }
-
-    //void OnCollisionExit(Collision collision)
-    //{
-    //    if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
-    //    {
-    //        jumpableObject.Remove(collision.gameObject);
-    //    }
-    //}
 }
 
 //Previuos tries
@@ -134,3 +143,14 @@ public class PlayerMovement : MonoBehaviour
 //Debug.Log("I am walking forward");
 //Debug.Log("I am walking backwards");
 //Debug.Log("Moving forward");
+//if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
+//{
+//    jumpableObject.Add(collision.gameObject);
+//}
+//void OnCollisionExit(Collision collision)
+//{
+//    if (((1 << collision.gameObject.layer) & jumpableLayers) != 0)
+//    {
+//        jumpableObject.Remove(collision.gameObject);
+//    }
+//}
