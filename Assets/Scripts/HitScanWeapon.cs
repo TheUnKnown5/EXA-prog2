@@ -5,12 +5,11 @@ using UnityEngine;
 public class HitScanWeapon : WeaponScript
 {
     [SerializeField] GameObject player;
-    [SerializeField] WeaponValues weaponValues;
     [SerializeField] LayerMask IgnoreHitMask = 0;
 
-    public override bool AttackEnemy()
+    public override bool Fire()
     {
-        if (base.AttackEnemy() == false)
+        if (base.Fire() == false)
         {
             return false;
         }

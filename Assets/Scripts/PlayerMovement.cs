@@ -42,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
         forwardMovement = moveInput.x;
         backwardMovement = moveInput.z;
-
-        Debug.Log("Is grounded: " + isGrounded);
     }
 
     void FixedUpdate()
