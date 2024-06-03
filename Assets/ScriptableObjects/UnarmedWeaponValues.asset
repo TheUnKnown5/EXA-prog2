@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UnarmedWeaponValues
   m_EditorClassIdentifier: 
   damage: 0
-  ammunition: 1000
-  weaponRange: 1000
+  ammunition: 0
+  weaponRange: 0

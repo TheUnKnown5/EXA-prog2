@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   ammunition: 0
-  weaponRange: 3
+  weaponRange: 2
