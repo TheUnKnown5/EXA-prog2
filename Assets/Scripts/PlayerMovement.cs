@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // The jump needs some work done
-
     [Header("Movement")]
     [SerializeField] float movementSpeed = 5.0f;
 
@@ -96,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (value.isPressed && isGrounded)
+        if (isGrounded)
         {
             if (CanJump())
             {
@@ -107,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerJump()
     {
-        Debug.Log("I am jumping");
         playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isGrounded = false;
     }
@@ -116,7 +113,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & jumpableLayers) != 0)
         {
-            Debug.Log("Landed on jumpablelayers");
             isGrounded = true;
         }
     }
@@ -125,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & jumpableLayers) != 0)
         {
-            Debug.Log("Left jumpablelayers");
             isGrounded = false;
         }
     }
