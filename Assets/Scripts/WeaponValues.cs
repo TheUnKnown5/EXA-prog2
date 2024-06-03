@@ -7,4 +7,7 @@ using UnityEngine;
 public class WeaponValues : ScriptableObject
 {
     public int damage;
+    public int ammunition = 1000;
+
+    public float weaponRange = 1000f;
 }

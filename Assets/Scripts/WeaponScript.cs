@@ -8,18 +8,19 @@ public class WeaponScript : MonoBehaviour
     [Header("Enemy reference")]
     [SerializeField] GameObject enemy;
 
-
+    [Header("Weapon reference")]
     [SerializeField] WeaponValues weaponValues;
 
     EnemyScript enemyHealth;
 
-    void Start()
-    {
-        enemyHealth = GetComponent<EnemyScript>();
-    }
 
-    public virtual void AttackEnemy()
+    public virtual bool AttackEnemy()
     {
-        enemyHealth.EnemyDamageToTake(weaponValues.damage);
+        if (weaponValues.ammunition < 1)
+        {
+            return false;
+        }
+        weaponValues.ammunition--;
+        return true;
     }
 }

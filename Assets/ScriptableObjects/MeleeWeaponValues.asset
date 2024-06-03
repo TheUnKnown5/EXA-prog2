@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08eae9a0dc32d248a99083a3356d221, type: 3}
   m_Name: MeleeWeaponValues
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 25
+  ammunition: 0
+  weaponRange: 3
